@@ -1,6 +1,7 @@
 import urllib
 import json
 import os
+import sys
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
@@ -21,10 +22,11 @@ class progLang(db.Model):
     language_name = db.Column(db.String(20))
     language_question = db.Column(db.String(256))
 
-progLangDB = progLang.query.all()
-
-assert progLangDB != None, 'Database not loaded'
-
+try:
+    progLang.query.all()
+except Exception as e:
+    print "Error:\n",e
+    sys.exit(1)
 
 # Make webhook
 @app.route('/webhook', methods=['POST'])
