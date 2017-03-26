@@ -1,0 +1,22 @@
+{
+  "id": "5f49f8c4-ec8b-4e44-b8a2-dcfe782cad08",
+  "timestamp": "2017-03-26T14:50:46.084Z",
+  "lang": "en",
+  "result": {
+    "source": "agent",
+    "resolvedQuery": "python",
+    "action": "progLang.ques",
+    "actionIncomplete": false,
+    "parameters": {
+      "progLang": "python"
+    },
+    "contexts": [],
+    "metadata": {
+      "intentId": "d09f8494-9aa8-4c76-a0af-662a637a710c",
+      "webhookUsed": "true",
+      "webhookForSlotFillingUsed": "false",
+      "intentName": "progLang-ques"
+    },
+    "sessionId": "3c42bdfc-90e5-4be9-937b-199028fead81"
+  }
+}

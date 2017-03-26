@@ -23,15 +23,18 @@ class progLang(db.Model):
 
 progLangDB = progLang.query.all()
 
+assert progLangDB != None, 'Database not loaded'
+
+
 # Make webhook
-@app.route('/istest1_webhook', methods=['POST'])
+@app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
-
+    print req
     print("Request:")
     print(json.dumps(req, indent=4))
 
-    resp = makeWHookeResult(req)
+    resp = makeWebHookeResult(req)
     resp = json.dumps(req, indent=4)
     print (resp)
     flresp = make_response(resp)
@@ -39,35 +42,34 @@ def webhook():
     return flresp
 
 
-def makeWHookeResult(req):
+def makeWebHookeResult(req):
     '''
     Refer https://docs.api.ai/docs/query for more info
     on response fields
 
     Action name == progLang.ques
     '''
-    if req.get('result').get('action') != 'progLang.ques':
+    if req.get("result").get("action") != "progLang.ques":
         return {}
 
-    result = req.get('result')
-    parameters= result.get('parameters')
-    language = parameters.get('progLang') # Get entity value for progLang   
-    if language=='python':
-        selectLang = progLangDB.query.filter_by(language_name='python')
-        selectLang = selectLang.language_question
-
+    result = req.get("result")
+    parameters= result.get("parameters")
+    language = parameters.get("progLang") # Get entity value for progLang   
+    if language=="python":
+        selectLang = progLang.query.filter_by(language_name="python")
+        selectLang = [i.language_question for i in selectLang]
     else:
-        selectLang = progLangDB.query.filter_by(language_name='C++')
-        selectLang = selectLang.language_question
+        selectLang = progLang.query.filter_by(language_name="C++")
+        selectLang = [i.language_question for i in selectLang]
 
     speech = selectLang
-    print('Response:')
+    print("Response:")
     print(speech)
 
     return {
-        'speech': speech,
-        'displayText': speech,
-        'source': 'apiai-progLang-ques'
+        "speech": speech,
+        "displayText": speech,
+        "source": "apiai-progLang-ques"
     }
 
 
