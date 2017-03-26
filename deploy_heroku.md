@@ -8,7 +8,7 @@
 
 * Install Heroku CLI
 
-* Add remote to heroku-`$ heroku git:remote -a heroku_app_name`. Check if heroku added to remote- `$ remote -v`
+* Add heroku to remote-`$ heroku git:remote -a heroku_app_name`. Check if heroku added to remote- `$ remote -v`
 
 * Execute `$ heroku create --buildpack heroku/python` for python build. 
 
