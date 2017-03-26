@@ -61,7 +61,7 @@ def makeWebHookeResult(req):
         selectLang = progLang.query.filter_by(language_name="C++")
         selectLang = [i.language_question for i in selectLang]
 
-    speech = selectLang
+    speech = selectLang[0]
     #print("Response:")
     #print(speech)
 
