@@ -30,15 +30,14 @@ assert progLangDB != None, 'Database not loaded'
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
-    print req
     print("Request:")
     print(json.dumps(req, indent=4))
-
     resp = makeWebHookeResult(req)
-    resp = json.dumps(req, indent=4)
-    print (resp)
+    resp = json.dumps(resp, indent=4)
     flresp = make_response(resp)
     flresp.headers['Content-Type'] = 'application/json'
+    print "Response:"
+    print flresp.data
     return flresp
 
 
@@ -63,8 +62,8 @@ def makeWebHookeResult(req):
         selectLang = [i.language_question for i in selectLang]
 
     speech = selectLang
-    print("Response:")
-    print(speech)
+    #print("Response:")
+    #print(speech)
 
     return {
         "speech": speech,
